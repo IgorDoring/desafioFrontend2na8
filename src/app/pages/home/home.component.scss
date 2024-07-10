@@ -1,0 +1,86 @@
+main {
+  section {
+    margin: 0 auto;
+    @media screen and (min-width: 411px) {
+      max-width: 410px;
+    }
+
+    .swLogo {
+      margin: 80px 0;
+      max-width: 100%;
+    }
+
+    div.card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 24px;
+      gap: 32px;
+      /* Basic Colors/Surface1 */
+      background: #232323;
+      /* Strong */
+      box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+
+      .meta {
+        // as a flex item
+        flex: none;
+        order: 0;
+        align-self: stretch;
+        flex-grow: 0;
+        //as a flex container
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 24px;
+
+        .meta-text {
+          // as a flex item
+          flex: none;
+          order: 0;
+          flex-grow: 0;
+          //as a flex container
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 0px;
+          gap: 8px;
+          color: #cecece;
+        }
+
+        // email
+        input {
+          // as a flex item
+          flex: none;
+          align-self: stretch;
+          flex-grow: 0;
+          height: 32px;
+          /* Basic Colors/Surface2 */
+          color: #cecece;
+          padding: 8px;
+          background: #353535;
+          border: 1px solid rgba(255, 232, 31, 0.3);
+          border-radius: 8px;
+        }
+
+        button {
+          flex: none;
+          order: 1;
+          align-self: stretch;
+          flex-grow: 0;
+          height: 40px;
+          /* Basic Colors/Primary */
+          background: #FFE81F;
+          /* Weak */
+          box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.2);
+          border-radius: 8px;
+          &.disabled {
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.32);
+          }
+        }
+      }
+    }
+  }
+}
