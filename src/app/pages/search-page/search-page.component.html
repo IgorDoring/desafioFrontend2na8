@@ -17,15 +17,14 @@
                   searchForm.controls.search.dirty,
                 success: searchForm.controls.search.valid
               }"
-              placeholder="exemplo@search.com"
+              placeholder="Darth Vader"
               required
             />
-            @if ((!searchForm.controls.search.valid &&
-            searchForm.controls.search.dirty)) {
-            <span>Email Inválido</span>
+            @if (erro) {
+            <span>{{mensagem}}</span>
             }
           </div>
-          <button type="submit" [disabled]="!searchForm.valid">Próximo</button>
+          <button type="submit" [disabled]="!searchForm.valid">Pesquisar</button>
         </form>
       </div>
     </section>
