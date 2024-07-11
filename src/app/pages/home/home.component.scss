@@ -34,6 +34,7 @@ main {
         align-items: flex-start;
         padding: 0px;
         gap: 24px;
+        color: #cecece;
 
         .meta-text {
           // as a flex item
@@ -46,7 +47,6 @@ main {
           align-items: flex-start;
           padding: 0px;
           gap: 8px;
-          color: #cecece;
         }
 
         // email
@@ -56,10 +56,12 @@ main {
           align-self: stretch;
           flex-grow: 0;
           height: 32px;
-          /* Basic Colors/Surface2 */
-          color: #cecece;
           padding: 8px;
+          /* Text/onBackground */
+          color: #cecece;
+          /* Basic Colors/Surface2 */
           background: #353535;
+          /* States/Enabled */
           border: 1px solid rgba(255, 232, 31, 0.3);
           border-radius: 8px;
         }
@@ -71,11 +73,27 @@ main {
           flex-grow: 0;
           height: 40px;
           /* Basic Colors/Primary */
-          background: #FFE81F;
-          /* Weak */
+          background: #ffe81f;
+          color: #20182b;
+          /* Weak shadow */
           box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.2);
           border-radius: 8px;
+          cursor: pointer;
+          &:hover {
+            /* Medium shadow */
+            box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+          }
+          &:active {
+            /* Basic Colors/Surface2 */
+            border: 1px solid #353535;
+            /* Medium shadow */
+            box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+          }
           &.disabled {
+            cursor: default;
+            background-color: transparent;
             border: 1px solid rgba(255, 255, 255, 0.12);
             color: rgba(255, 255, 255, 0.32);
           }
