@@ -1,0 +1,33 @@
+<main>
+    <section>
+      <img class="swLogo" src="../assets/LogoStarWars.png" alt="" />
+      <div class="card">
+        <form class="meta" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+          <div class="meta-text">
+            <p>Agora, digite seu personagem favorito de Star Wars</p>
+          </div>
+          <div>
+            <input
+              id="search"
+              formControlName="search"
+              type="search"
+              [ngClass]="{
+                error:
+                  !searchForm.controls.search.valid &&
+                  searchForm.controls.search.dirty,
+                success: searchForm.controls.search.valid
+              }"
+              placeholder="exemplo@search.com"
+              required
+            />
+            @if ((!searchForm.controls.search.valid &&
+            searchForm.controls.search.dirty)) {
+            <span>Email Inválido</span>
+            }
+          </div>
+          <button type="submit" [disabled]="!searchForm.valid">Próximo</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  
