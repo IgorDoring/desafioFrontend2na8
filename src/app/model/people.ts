@@ -6,9 +6,10 @@ export interface PeopleResponse {
 }
 
 export interface People {
+  readonly name: string
   readonly films: { title: string }[];
   readonly starships: { name: string }[];
-  readonly vehicules: { name: string }[];
+  readonly vehicles: { name: string }[];
   readonly species: { name: string }[];
   readonly homeworld: string;
 }
