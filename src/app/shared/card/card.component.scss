@@ -78,8 +78,6 @@
       }
     }
 
-    
-
     button {
       flex: none;
       order: 1;
@@ -110,6 +108,47 @@
         background-color: transparent;
         border: 1px solid rgba(255, 255, 255, 0.12);
         color: rgba(255, 255, 255, 0.32);
+      }
+    }
+
+    .content {
+      /* Auto layout */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+
+      /* Inside auto layout */
+      flex: none;
+      align-self: stretch;
+      flex-grow: 0;
+      div {
+        padding: 8px 0px;
+        filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.12));
+        border-radius: 8px;
+        .content-row {
+          /* Auto layout */
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          flex-wrap: wrap;
+          gap: 8px;
+          .content-tag{
+            padding: 8px;
+            /* Basic Colors/Surface2 */
+            background: #353535;
+            border-radius: 4px;
+          }
+          
+          .content-tag-emptied{
+            padding: 8px;
+            /* States/Disabled */
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 4px;
+            /* Text/onDisabled */
+            color: rgba(255, 255, 255, 0.32);
+          }
+        }
       }
     }
   }
