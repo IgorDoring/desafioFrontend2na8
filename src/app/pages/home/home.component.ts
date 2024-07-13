@@ -7,24 +7,25 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CardComponent } from "../../shared/card/card.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, CardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
   firstForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(3)]),
+    email: new FormControl(localStorage.getItem('email') || '', [Validators.required, Validators.email, Validators.minLength(3)]),
   });
 
   constructor(private router: Router){}
 
   onSubmit() {
     if(this.firstForm.valid){
-      alert(this.firstForm.value.email)
+      localStorage.setItem('email', this.firstForm.controls.email.value!)
       this.router.navigate(["search"])
     }
   }

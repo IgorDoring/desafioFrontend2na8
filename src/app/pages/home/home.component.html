@@ -1,33 +1,24 @@
-<main>
-  <section>
-    <img class="swLogo" src="../assets/LogoStarWars.png" alt="" />
-    <div class="card">
-      <form class="meta" [formGroup]="firstForm" (ngSubmit)="onSubmit()">
-        <div class="meta-text">
-          <h1>Olá!</h1>
-          <p>Para começar seu teste, digite um e-mail:</p>
-        </div>
-        <div>
-          <input
-            id="email"
-            formControlName="email"
-            type="email"
-            [ngClass]="{
-              error:
-                !firstForm.controls.email.valid &&
-                firstForm.controls.email.dirty,
-              success: firstForm.controls.email.valid
-            }"
-            placeholder="exemplo@email.com"
-            required
-          />
-          @if ((!firstForm.controls.email.valid &&
-          firstForm.controls.email.dirty)) {
-          <span>Email Inválido</span>
-          }
-        </div>
-        <button type="submit" [disabled]="!firstForm.valid">Próximo</button>
-      </form>
-    </div>
-  </section>
-</main>
+<section>
+  <img class="swLogo" src="../assets/LogoStarWars.png" alt="" />
+  <app-card>
+    <form class="meta" [formGroup]="firstForm" (ngSubmit)="onSubmit()">
+      <div class="meta-text">
+        <h1>Olá!</h1>
+        <p>Para começar seu teste, digite um e-mail:</p>
+      </div>
+      <div class="textInput">
+        <input
+          formControlName="email"
+          type="email"
+          placeholder="exemplo@email.com"
+          required
+        />
+        @if ((!firstForm.controls.email.valid &&
+        firstForm.controls.email.dirty)) {
+        <span>Email Inválido</span>
+        }
+      </div>
+      <button type="submit" [disabled]="!firstForm.valid">Próximo</button>
+    </form>
+  </app-card>
+</section>
