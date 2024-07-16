@@ -12,16 +12,4 @@ import { Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class CardComponent {
-  // genericForm = new FormGroup({
-  //   textInput: new FormControl('', [Validators.required, Validators.email, Validators.minLength(3)]),
-  // });
-
-  // constructor(private router: Router){}
-
-  // onSubmit() {
-  //   if(this.genericForm.valid){
-  //     alert(this.genericForm.value.textInput)
-  //     this.router.navigate(["search"])
-  //   }
-  // }
 }
