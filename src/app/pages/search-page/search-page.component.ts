@@ -7,45 +7,53 @@ import {
   Validators,
 } from '@angular/forms';
 import { StarwarsService } from '../../service/starwars.service';
-import { Router } from '@angular/router';
+import { People, SearchResponse } from '../../model/people';
+import { map, Observable, tap } from 'rxjs';
+import { CardComponent } from '../../shared/card/card.component';
+import { LoadingComponent } from '../../shared/loading/loading.component';
 
 @Component({
   selector: 'app-search-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, CardComponent, LoadingComponent],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss',
 })
 export class SearchPageComponent {
-  //todo pagina soh eh acessar ao digitar email
+  //todo pagina soh eh acessada ao digitar email
   searchForm = new FormGroup({
     search: new FormControl('', [Validators.required]),
   });
-  erro: boolean = false
-  mensagem: string = ""
+  isLoading: boolean = false;
+  erro: boolean = false;
+  // search$: Observable<SearchResponse> | undefined;
+  mensagem: string = '';
 
-  constructor(private swService: StarwarsService, private router: Router) {}
+  personagemMock: People | undefined;
+
+  constructor(private swService: StarwarsService) {}
+
+  pesquisarNovamente() {
+    this.personagemMock = undefined
+  }
 
   onSubmit() {
-    if (this.searchForm.valid) {
-      let character = this.searchForm.controls.search.value
-      this.swService
-        .getCharacter(character!)
-        .subscribe({
-          next: (res) => {
-            this.erro = false
-            if(res.count == 1){
-              this.router.navigate(["resultado"], { queryParams: {char: character}})
-            }else if(res.count > 1){
-              this.erro = true
-              this.mensagem = "Mais de um personagem encontrado, seja mais especifico"
-            }
-          },
-          error: (err) => {
-            this.erro = true
-            this.mensagem = "Personagem Inválido"
-          }
-        });
-    }
+    this.isLoading = true;
+    setTimeout(() => {
+      this.personagemMock = {
+        name: 'Darth Vader',
+        films: [
+          'A Ameaça Fantasma',
+          'Ataque dos Clones',
+          'A Vingança dos Sith',
+          'O Retorno de Jedi',
+        ],
+        starships: ['TIE Advanced'],
+        vehicles: [],
+        species: [],
+        homeworld: 'Tatooine',
+      };
+      this.isLoading = false;
+    }, 2000);
   }
 }
