@@ -18,7 +18,7 @@ import { CardComponent } from "../../shared/card/card.component";
 })
 export class HomeComponent {
   firstForm = new FormGroup({
-    email: new FormControl(localStorage.getItem('email') || '', [Validators.required, Validators.email, Validators.minLength(3)]),
+    email: new FormControl(localStorage.getItem('email') || '', [Validators.required, Validators.pattern(/^[a-zA-z0-9]{3,}@/), Validators.minLength(4)]),
   });
 
   constructor(private router: Router){}
