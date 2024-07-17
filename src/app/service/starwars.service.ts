@@ -15,4 +15,9 @@ export class StarwarsService {
   getCharacter(char: string): Observable<SearchResponse> {
     return this.http.get<SearchResponse>(this.url + 'people/?search=' + char);
   }
+
+  getFilm(film: string): any{
+    return this.http.get<any>(film);
+
+  }
 }
