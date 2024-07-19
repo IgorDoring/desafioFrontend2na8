@@ -1,4 +1,5 @@
-@if ((search$ | async) && (resultado$ | async); as personagem) {
+
+@if ((search$ | async) && resultado$ | async; as personagem) {
 <app-card>
   <div class="meta">
     <div class="meta-text">
@@ -77,12 +78,12 @@
         formControlName="search"
         type="search"
         [ngClass]="{
-          'ng-invalid': erro
+          'ng-invalid': hasError
         }"
         placeholder="Darth Vader"
         required
       />
-      @if (erro) {
+      @if (hasError) {
       <span>Personagem Inválido</span>
       }
     </div>
