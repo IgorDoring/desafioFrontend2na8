@@ -31,7 +31,7 @@ import { LoadingComponent } from '../../shared/loading/loading.component';
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss',
 })
-export class SearchPageComponent implements OnInit{
+export class SearchPageComponent implements OnInit {
   //todo pagina soh eh acessada ao digitar email
   searchForm = new FormGroup({
     search: new FormControl('', [Validators.required]),
@@ -40,22 +40,26 @@ export class SearchPageComponent implements OnInit{
   hasError: boolean = false;
   search$: Observable<People | undefined> | undefined;
   resultado$: Observable<People> | undefined;
-  personagem: People | undefined
+  personagem: People | undefined;
 
   constructor(private swService: StarwarsService) {}
 
   ngOnInit(): void {
-    let personagem = localStorage.getItem('personagem')
-    if(personagem != null){
-      this.search$ = of(JSON.parse(personagem))
-      this.resultado$ = of(JSON.parse(personagem))
+    let personagem = localStorage.getItem('personagem');
+    if (personagem != null) {
+      this.search$ = of(JSON.parse(personagem));
+      this.resultado$ = of(JSON.parse(personagem));
+    } else {
+      this.search$ = undefined;
+      this.resultado$ = undefined;
+      localStorage.removeItem('personagem');
     }
   }
 
   pesquisarNovamente() {
     this.search$ = undefined;
     this.resultado$ = undefined;
-    localStorage.removeItem('personagem')
+    localStorage.removeItem('personagem');
   }
 
   onSubmit() {
@@ -115,10 +119,12 @@ export class SearchPageComponent implements OnInit{
                 defaultIfEmpty([])
               ),
             }).pipe(
-              tap( personagem => localStorage.setItem('personagem', JSON.stringify(personagem))),
+              tap((personagem) =>
+                localStorage.setItem('personagem', JSON.stringify(personagem))
+              ),
               finalize(() => {
                 this.isLoading = false;
-                this.hasError = false
+                this.hasError = false;
               })
             );
 
