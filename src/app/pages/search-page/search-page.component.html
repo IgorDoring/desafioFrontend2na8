@@ -1,92 +1,93 @@
-    @if (personagemMock) {
-    <app-card>
-      <div class="meta">
-        <div class="meta-text">
-          <h1>Informações sobre {{ personagemMock.name }}:</h1>
-        </div>
-        <div class="content">
-          <div>
-            <h3 class="content-title">Filmes:</h3>
-            <div class="content-row">
-              @if(personagemMock.films.length > 0){ @for(film of
-              personagemMock.films; track film){
-              <p class="content-tag">{{ film }}</p>
-              } }@else {
-              <p class="content-tag-emptied">N/A</p>
-              }
-            </div>
-          </div>
-          <div>
-            <h3 class="content-title">Naves:</h3>
-            <div class="content-row">
-              @if(personagemMock.starships.length > 0){ @for(starship of
-              personagemMock.starships; track starship){
-              <p class="content-tag">{{ starship }}</p>
-              } }@else {
-              <p class="content-tag-emptied">N/A</p>
-              }
-            </div>
-          </div>
-          <div>
-            <h3 class="content-title">Veiculos:</h3>
-            <div class="content-row">
-              @if(personagemMock.vehicles.length > 0){ @for(vehicle of
-              personagemMock.vehicles; track vehicle){
-              <p class="content-tag">{{ vehicle }}</p>
-              } }@else {
-              <p class="content-tag-emptied">N/A</p>
-              }
-            </div>
-          </div>
-          <div>
-            <h3 class="content-title">Especie:</h3>
-            <div class="content-row">
-              @if(personagemMock.species.length > 0){ @for(specie of
-              personagemMock.species; track specie){
-              <p class="content-tag">{{ specie }}</p>
-              } }@else {
-              <p class="content-tag-emptied">N/A</p>
-              }
-            </div>
-          </div>
-          <div>
-            <h3 class="content-title">Planeta:</h3>
-            <div class="content-row">
-              @if(personagemMock.homeworld){
-              <p class="content-tag">{{ personagemMock.homeworld }}</p>
-              }@else {
-              <p class="content-tag-emptied">N/A</p>
-              }
-            </div>
-          </div>
-          <button (click)="pesquisarNovamente()">Pesquisar Novamente</button>
-        </div>
-      </div>
-    </app-card>
-    }@else if(isLoading){
-    <app-loading></app-loading>
-
-    }@else {
-    <app-card>
-      <form class="meta" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-        <div class="meta-text">
-          <p>Agora, digite seu personagem favorito de Star Wars</p>
-        </div>
-        <div class="textInput">
-          <input
-            formControlName="search"
-            type="search"
-            [ngClass]="{
-              error: erro
-            }"
-            placeholder="Darth Vader"
-            required
-          />
-          @if (erro) {
-          <span>Personagem Inválido</span>
+@if ((search$ | async) && (resultado$ | async); as personagem) {
+<app-card>
+  <div class="meta">
+    <div class="meta-text">
+      <h1>Informações sobre {{ personagem.name }}:</h1>
+    </div>
+    <div class="content">
+      <div>
+        <h3 class="content-title">Filmes:</h3>
+        <div class="content-row">
+          @if(personagem.films.length > 0){ @for(film of personagem.films; track
+          film){
+          <p class="content-tag">{{ film }}</p>
+          } }@else {
+          <p class="content-tag-emptied">N/A</p>
           }
         </div>
-        <button type="submit" [disabled]="!searchForm.valid">Pesquisar</button>
-      </form>
-    </app-card>
-    }
+      </div>
+      <div>
+        <h3 class="content-title">Naves:</h3>
+        <div class="content-row">
+          @if(personagem.starships.length > 0){ @for(starship of
+          personagem.starships; track starship){
+          <p class="content-tag">{{ starship }}</p>
+          } }@else {
+          <p class="content-tag-emptied">N/A</p>
+          }
+        </div>
+      </div>
+      <div>
+        <h3 class="content-title">Veiculos:</h3>
+        <div class="content-row">
+          @if(personagem.vehicles.length > 0){ @for(vehicle of
+          personagem.vehicles; track vehicle){
+          <p class="content-tag">{{ vehicle }}</p>
+          } }@else {
+          <p class="content-tag-emptied">N/A</p>
+          }
+        </div>
+      </div>
+      <div>
+        <h3 class="content-title">Especie:</h3>
+        <div class="content-row">
+          @if(personagem.species.length > 0){ @for(specie of personagem.species;
+          track specie){
+          <p class="content-tag">{{ specie }}</p>
+          } }@else {
+          <p class="content-tag-emptied">N/A</p>
+          }
+        </div>
+      </div>
+      <div>
+        <h3 class="content-title">Planeta:</h3>
+        <div class="content-row">
+          @if(personagem.homeworld){
+          <p class="content-tag">{{ personagem.homeworld }}</p>
+          }@else {
+          <p class="content-tag-emptied">N/A</p>
+          }
+        </div>
+      </div>
+      <button (click)="pesquisarNovamente()">Pesquisar Novamente</button>
+    </div>
+  </div>
+</app-card>
+}@else if(isLoading){
+<app-loading></app-loading>
+
+}@else {
+<app-card>
+  <form class="meta" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <div class="meta-text">
+      <p>Agora, digite seu personagem favorito de Star Wars</p>
+    </div>
+    <div class="textInput">
+      <input
+        formControlName="search"
+        type="search"
+        [ngClass]="{
+          'ng-invalid': erro
+        }"
+        placeholder="Darth Vader"
+        required
+      />
+      @if (erro) {
+      <span>Personagem Inválido</span>
+      }
+    </div>
+    <button type="submit" [disabled]="!searchForm.valid">Pesquisar</button>
+  </form>
+</app-card>
+
+}
