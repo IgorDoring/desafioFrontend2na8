@@ -46,7 +46,6 @@ export class SearchPageComponent implements OnInit{
 
   ngOnInit(): void {
     let personagem = localStorage.getItem('personagem')
-    console.log(personagem)
     if(personagem != null){
       this.search$ = of(JSON.parse(personagem))
       this.resultado$ = of(JSON.parse(personagem))
