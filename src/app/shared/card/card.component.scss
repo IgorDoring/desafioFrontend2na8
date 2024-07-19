@@ -1,37 +1,66 @@
-.card {
+$basic-color-background: rgba(18, 18, 18, 0.97);
+$basic-color-surface1: #232323;
+$basic-color-surface2: #353535;
+$basic-color-primary: #ffe81f;
+$text-color-primary: #20182b;
+$text-color-background: #cecece;
+$text-color-surface: #dfdfdf;
+$text-color-state-error: #C47768;
+$text-color-onDisabled: rgba(255, 255, 255, 0.32);
+$border-state-enabled: 1px solid rgba(255, 232, 31, 0.3);
+$border-state-focused: 1px solid $basic-color-primary;
+$border-state-error: 1px solid $text-color-state-error;
+$border-state-success: 1px solid #03DAC6;
+$border-state-disabled: 1px solid rgba(255, 255, 255, 0.12);
+
+@mixin flex-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+@mixin flex-item {
+  flex: none;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+@mixin shadow($shadow){
+  @if $shadow == 'strong'{
+    box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.4);
+  }
+  @if $shadow == 'medium'{
+    box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.3);
+  }
+  @if $shadow == 'weak'{
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+}
+
+.card {
   padding: 24px;
   gap: 32px;
   /* Basic Colors/Surface1 */
-  background: #232323;
-  /* Strong */
-  box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.3);
+  background: $basic-color-surface1;
+  /* Strong shadow*/
+  @include shadow('strong');
   border-radius: 8px;
 
   .meta {
-    // as a flex item
-    flex: none;
-    align-self: stretch;
-    flex-grow: 0;
     //as a flex container
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    @include flex-container;
+    // as a flex item
+    @include flex-item;
     padding: 0px;
     gap: 24px;
-    color: #cecece;
+    color: $text-color-background;
 
     .meta-text {
-      // as a flex item
-      flex: none;
-      order: 0;
-      flex-grow: 0;
       //as a flex container
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+      @include flex-container;
+      // as a flex item
+      @include flex-item;
       padding: 0px;
       gap: 8px;
     }
@@ -39,115 +68,107 @@
     // email
     .textInput {
       // as a flex item
-      flex: none;
-      align-self: stretch;
-      flex-grow: 0;
+      @include flex-item;
       input {
         width: 100%;
         height: 32px;
         padding: 8px;
         /* Text/onBackground */
-        color: #cecece;
+        color: $text-color-background;
         /* Basic Colors/Surface2 */
-        background: #353535;
+        background: $basic-color-surface2;
         border-radius: 8px;
         /* States/Enabled */
         &.ng-pristine.ng-untouched {
-          border: 1px solid rgba(255, 232, 31, 0.3);
+          border: $border-state-enabled;
         }
         &.ng-touched {
           /* States/Focused */
-          border: 1px solid #ffe81f;
+          border: $border-state-focused;
           /* Text/onSurface */
-          color: #dfdfdf;
+          color: $text-color-surface;
         }
         &.ng-invalid.ng-dirty.ng-touched {
           /* States/Error */
-          border: 1px solid #c47768;
+          border: $border-state-error;
         }
         &.ng-valid.ng-dirty.ng-touched {
           /* States/Success */
-          border: 1px solid #03dac6;
+          border: $border-state-success;
         }
       }
       span {
         flex: none;
         font-size: 14px;
         /* States/Error */
-        color: #c47768;
+        color: $text-color-state-error;
       }
     }
 
     button {
-      flex: none;
-      order: 1;
-      align-self: stretch;
-      flex-grow: 0;
+      // as a flex item
+      @include flex-item;
       height: 40px;
       /* Basic Colors/Primary */
-      background: #ffe81f;
-      color: #20182b;
+      background: $basic-color-primary;
+      color: $text-color-primary;
       /* Weak shadow */
-      box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.2);
+      @include shadow('weak');
+      
       border-radius: 8px;
       cursor: pointer;
       &:hover {
         /* Medium shadow */
-        box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.4);
-        border-radius: 8px;
+      @include shadow('medium');
+        
       }
       &:active {
         /* Basic Colors/Surface2 */
         border: 1px solid #353535;
         /* Medium shadow */
-        box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.4);
-        border-radius: 8px;
+        @include shadow('medium');
+
+        
       }
       &[disabled] {
         cursor: default;
         background-color: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        color: rgba(255, 255, 255, 0.32);
+        border: $border-state-disabled;
+        color: $text-color-onDisabled;
       }
     }
 
     .content {
-      /* Auto layout */
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-
-      /* Inside auto layout */
-      flex: none;
-      align-self: stretch;
-      flex-grow: 0;
+      //as a flex container
+      @include flex-container;
+      // as a flex item
+      @include flex-item;
       div {
         padding: 8px 0px;
         filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.12));
         border-radius: 8px;
         .content-row {
-          /* Auto layout */
+          /* as a flex container */
           display: flex;
           flex-direction: row;
-          align-items: flex-start;
           flex-wrap: wrap;
           gap: 8px;
-          .content-tag{
+          .content-tag {
             padding: 8px;
             font-size: 14px;
             /* Basic Colors/Surface2 */
-            background: #353535;
+            background: $basic-color-surface2;
             border-radius: 4px;
           }
-          
-          .content-tag-emptied{
+
+          .content-tag-emptied {
             padding: 8px;
             font-size: 14px;
             /* States/Disabled */
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: $border-state-disabled;
             border-radius: 4px;
             /* Text/onDisabled */
-            color: rgba(255, 255, 255, 0.32);
+            color: $text-color-onDisabled;
           }
         }
       }
