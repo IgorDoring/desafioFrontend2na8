@@ -1,0 +1,14 @@
+$basic-color-background: rgba(18, 18, 18, 0.97);
+$basic-color-surface1: #232323;
+$basic-color-surface2: #353535;
+$basic-color-primary: #ffe81f;
+$text-color-primary: #20182b;
+$text-color-background: #cecece;
+$text-color-surface: #dfdfdf;
+$text-color-state-error: #C47768;
+$text-color-onDisabled: rgba(255, 255, 255, 0.32);
+$border-state-enabled: 1px solid rgba(255, 232, 31, 0.3);
+$border-state-focused: 1px solid $basic-color-primary;
+$border-state-error: 1px solid $text-color-state-error;
+$border-state-success: 1px solid #03DAC6;
+$border-state-disabled: 1px solid rgba(255, 255, 255, 0.12);
