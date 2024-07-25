@@ -37,8 +37,7 @@ export class SearchPageComponent implements OnInit {
   });
   isLoading: boolean = false;
   hasError: boolean = false;
-  search$: Observable<any> | undefined;
-  resultado$: Observable<People> | undefined;
+  search$: Observable<People> | undefined;
   personagem: People | undefined;
 
   constructor(private swService: StarwarsService) {}
