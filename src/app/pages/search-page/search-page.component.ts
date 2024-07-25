@@ -44,20 +44,17 @@ export class SearchPageComponent implements OnInit {
   constructor(private swService: StarwarsService) {}
 
   ngOnInit(): void {
-    let personagem = localStorage.getItem('personagem');
+    const personagem = localStorage.getItem('personagem');
     if (personagem != null) {
       this.search$ = of(JSON.parse(personagem));
-      this.resultado$ = of(JSON.parse(personagem));
     } else {
       this.search$ = undefined;
-      this.resultado$ = undefined;
       localStorage.removeItem('personagem');
     }
   }
 
   pesquisarNovamente() {
     this.search$ = undefined;
-    this.resultado$ = undefined;
     localStorage.removeItem('personagem');
   }
 
